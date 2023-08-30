@@ -29,9 +29,7 @@ if uploaded_file is not None:
     if st.button('Rotate Right'):
         st.session_state.rotation = (st.session_state.rotation + 90) % 360
 
-    if st.button('Rotate Left'):
-        st.session_state.rotation = (st.session_state.rotation - 90) % 360
-
+    
     if st.button('Perform OCR'):
         st.write("Recognized Text")
         # Perform OCR based on selected language

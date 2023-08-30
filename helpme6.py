@@ -27,7 +27,7 @@ if uploaded_file is not None:
     st.write(text)
 
     # Analyze text using ChatGPT and provide an opinion
-    if st.button('Analyze'):
+    if st.button('Analyze with ChatGPT'):
         # Replace with an actual API call to OpenAI GPT
         prompt = f"This is a text to analyze: {text}. What is your opinion about the topic? Also, if there are any multiple-choice questions, what are the correct answers?"
         response = openai.Completion.create(

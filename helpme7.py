@@ -38,7 +38,7 @@ if uploaded_file is not None:
         st.write(text)
 
         if st.button('Analyze'):
-            prompt = f"This is a text to analyze: {text}. What is your opinion about the topic? Also, if there are any multiple-choice questions, what are the correct answers?"
+            prompt = f"This is a text to analyze: {text}. Look for any questions contained in the text. First think step by step, try to understand what the context of the topic is. then act as a super expert in that topic. then give me the answer you consider correct"
             response = openai.Completion.create(
               engine="text-davinci-002",
               prompt=prompt,

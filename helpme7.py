@@ -4,7 +4,7 @@ import pytesseract
 import openai
 
 # Initialize GPT API
-openai.api_key = "your-openai-api-key"
+openai.api_key = API_KEY
 
 # Set Tesseract path
 pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
@@ -26,22 +26,25 @@ if uploaded_file is not None:
 
     st.image(rotated_image, caption="Uploaded Image", use_column_width=True)
 
-    if st.button('Rotate Image'):
+    if st.button('Rotate Right'):
         st.session_state.rotation = (st.session_state.rotation + 90) % 360
 
-    st.write("Recognized Text")
+    if st.button('Rotate Left'):
+        st.session_state.rotation = (st.session_state.rotation - 90) % 360
 
-    # Perform OCR based on selected language
-    text = pytesseract.image_to_string(rotated_image, lang=lang_code)
-    st.write(text)
+    if st.button('Perform OCR'):
+        st.write("Recognized Text")
+        # Perform OCR based on selected language
+        text = pytesseract.image_to_string(rotated_image, lang=lang_code)
+        st.write(text)
 
-    if st.button('Analyze'):
-        prompt = f"This is a text to analyze: {text}. What is your opinion about the topic? Also, if there are any multiple-choice questions, what are the correct answers?"
-        response = openai.Completion.create(
-          engine="text-davinci-002",
-          prompt=prompt,
-          max_tokens=150
-        )
+        if st.button('Analyze'):
+            prompt = f"This is a text to analyze: {text}. What is your opinion about the topic? Also, if there are any multiple-choice questions, what are the correct answers?"
+            response = openai.Completion.create(
+              engine="text-davinci-002",
+              prompt=prompt,
+              max_tokens=150
+            )
 
-        st.write("GPT-3 Analysis")
-        st.write(response.choices[0].text.strip())
+            st.write("GPT-3 Analysis")
+            st.write(response.choices[0].text.strip())

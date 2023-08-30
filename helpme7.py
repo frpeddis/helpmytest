@@ -4,7 +4,7 @@ import pytesseract
 import openai
 
 # Initialize GPT API
-openai.api_key = "your-openai-api-key"
+openai.api_key = st.secrets["API_KEY"]
 
 # Set Tesseract path
 pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'

@@ -26,7 +26,7 @@ if uploaded_file is not None:
 
     st.image(rotated_image, caption="Uploaded Image", use_column_width=True)
 
-    if st.button('Rotate Right'):
+    if st.button('Rotate'):
         st.session_state.rotation = (st.session_state.rotation + 90) % 360
 
     

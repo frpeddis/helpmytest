@@ -39,11 +39,11 @@ if uploaded_file is not None:
             temperature=0.2  # Lower temperature means less randomness
         )
 
-        st.write("GPT-3 Analysis")
+        st.write("GPT-3 Analysis - overview")
         st.write(response.choices[0].text.strip())
 
         
-        prompt = f"Now look for any questions contained in the text {text}. If you find a question, a quiz, a multiple-choice question, etc., give me the answer you consider correct to that question, quiz, or multiple-choice question. Do not end your output without giving an answer to questions contained in the text."
+        prompt = f"Now look for any questions contained in the text {text}. If you find a question, a quiz, a multiple-choice question, etc., give me the answer you consider correct to that question, quiz, or multiple-choice question. Do not end your output without giving an answer to questions contained in the text. If you do not find any question simply tell me that no questions found"
         response = openai.Completion.create(
             engine="text-davinci-002",
             prompt=prompt,
@@ -51,5 +51,5 @@ if uploaded_file is not None:
             temperature=0.2  # Lower temperature means less randomness
         )
 
-        st.write("GPT-3 Analysis")
+        st.write("GPT-3 Analysis - answer suggestion (if any)")
         st.write(response.choices[0].text.strip())

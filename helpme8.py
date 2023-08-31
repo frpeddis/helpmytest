@@ -1,6 +1,6 @@
 import streamlit as st
 import openai
-import cv2
+import opencv as cv2
 import numpy as np
 import pytesseract
 

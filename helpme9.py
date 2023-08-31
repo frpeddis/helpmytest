@@ -27,7 +27,7 @@ if uploaded_file is not None:
 
     # Analyze text using ChatGPT and provide an opinion
     if st.button('Analyze with ChatGPT'):
-        prompt = f"This is a text to analyze: {text}. First think step by step, then understand what is the topic of the text. You are an expert on that topic. Now give me your opinion about that topic. Then look for any questions contained in the text. If there is a question give me the answer you consider correct"
+        prompt = f"This is a text to analyze: {text}. First think step by step, then understand what is the topic of the text. You are an expert on that topic. Now give me your opinion about that topic. Then it is very important to look for any questions contained in the text. If you find a question, a quiz, a multichoise questions, etc give me the answer you consider correct to that question, quiz, multiple choise question"
         response = openai.Completion.create(
             engine="text-davinci-002",
             prompt=prompt,

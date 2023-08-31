@@ -25,14 +25,15 @@ lang_code = 'eng' if language == 'English' else 'ita'
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert('RGB')
-    
+
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
     if st.button('Rotate'):
         st.session_state.rotation = (st.session_state.rotation + 90) % 360
-        image = image.rotate(st.session_state.rotation)
+        image = image.transpose(Image.Transpose.ROTATE_90)  # Rotate 90 degrees
+        st.session_state.crop_coords = (0, 0, image.size[0], image.size[1])  # Update crop coordinates to match new dimensions
         st.image(image, caption="Rotated Image", use_column_width=True)
-    
+
     x1, y1, x2, y2 = st.session_state.crop_coords
     x1 = st.slider("Left (x1)", min_value=0, max_value=image.size[0]-1, value=x1)
     y1 = st.slider("Top (y1)", min_value=0, max_value=image.size[1]-1, value=y1)
@@ -45,11 +46,8 @@ if uploaded_file is not None:
         st.image(image, caption="Cropped Image", use_column_width=True)
 
     if st.button('Perform OCR'):
-        # Apply the rotation right before OCR
-        rotated_image = ImageOps.exif_transpose(image).rotate(st.session_state.rotation)
-        
+        rotated_image = image  # Image has been rotated or cropped above, if requested
         st.write("Recognized Text")
-        # Perform OCR based on selected language
         text = pytesseract.image_to_string(rotated_image, lang=lang_code)
         st.write(text)
 

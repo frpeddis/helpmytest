@@ -5,12 +5,16 @@ import pytesseract
 
 # Initialize GPT API (Replace with your actual API key)
 openai.api_key = st.secrets["API_KEY"]
-#openai.api_key = "your-openai-api-key"
+# openai.api_key = "your-openai-api-key"
 
 # Set tesseract cmd path
 pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 
 st.title("OCR with GPT-3 Analysis")
+
+# Language selection
+lang_option = st.selectbox("Select OCR Language", ['English', 'Italiano'])
+ocr_lang = 'eng' if lang_option == 'English' else 'ita'
 
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
@@ -18,11 +22,10 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption="Uploaded Image", use_column_width=True)
     st.write("")
-
     st.write("Recognized Text")
 
-    # Perform OCR
-    text = pytesseract.image_to_string(image)
+    # Perform OCR based on selected language
+    text = pytesseract.image_to_string(image, lang=ocr_lang)
     st.write(text)
 
     # Analyze text using ChatGPT and provide an opinion
@@ -34,7 +37,8 @@ if uploaded_file is not None:
             max_tokens=200,
             temperature=0.2  # Lower temperature means less randomness
         )
-        prompt = f"Now look for any questions contained in the text {text}. If you find a question, a quiz, a multichoise questions, etc give me the answer you consider correct to that question, that quiz, that multiple choise question. Do not end your output without giving a answer to questions contained in the text"
+
+        prompt = f"Now look for any questions contained in the text {text}. If you find a question, a quiz, a multiple-choice question, etc., give me the answer you consider correct to that question, quiz, or multiple-choice question. Do not end your output without giving an answer to questions contained in the text."
         response = openai.Completion.create(
             engine="text-davinci-002",
             prompt=prompt,

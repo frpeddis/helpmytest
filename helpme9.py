@@ -31,7 +31,7 @@ if uploaded_file is not None:
         response = openai.Completion.create(
             engine="text-davinci-002",
             prompt=prompt,
-            max_tokens=200,
+            max_tokens=400,
             temperature=0.2  # Lower temperature means less randomness
         )
 

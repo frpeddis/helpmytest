@@ -17,7 +17,7 @@ st.title("OCR with GPT-3 Analysis")
 lang_option = st.selectbox("Select OCR Language", ['English', 'Italiano'])
 ocr_lang = 'eng' if lang_option == 'English' else 'ita'
 
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png", "heic"])
+uploaded_file = st.file_uploader("Upload an image ", type=["jpg", "jpeg", "png", "heic"])
 
 if uploaded_file is not None:
     

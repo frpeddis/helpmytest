@@ -52,13 +52,13 @@ if st.session_state.image is not None:
         text = pytesseract.image_to_string(st.session_state.image, lang=lang_code)
         st.write(text)
 
-        if st.button('Analyze'):
-            prompt = f"This is a text to analyze: {text}. Look for any questions contained in the text. First think step by step, try to understand what the context of the topic is. Then act as a super expert in that topic. Then give me the answer you consider correct"
-            response = openai.Completion.create(
-              engine="text-davinci-002",
-              prompt=prompt,
-              max_tokens=150
-            )
+    if st.button('Analyze'):
+        prompt = f"This is a text to analyze: {text}. Look for any questions contained in the text. First think step by step, try to understand what the context of the topic is. Then act as a super expert in that topic. Then give me the answer you consider correct"
+        response = openai.Completion.create(
+          engine="text-davinci-002",
+          prompt=prompt,
+          max_tokens=150
+        )
 
-            st.write("GPT-3 Analysis")
-            st.write(response.choices[0].text.strip())
+        st.write("GPT-3 Analysis")
+        st.write(response.choices[0].text.strip())

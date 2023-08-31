@@ -34,7 +34,7 @@ if uploaded_file is not None:
             max_tokens=200,
             temperature=0.2  # Lower temperature means less randomness
         )
-        prompt = f"Now look for any questions contained in the text {text}. If you find a question, a quiz, a multichoise questions, etc give me the answer you consider correct to that question, that quiz, that multiple choise question. Do not end your output without giving a answer to questions contained in the text"
+            prompt = f"Now look for any questions contained in the text {text}. If you find a question, a quiz, a multichoise questions, etc give me the answer you consider correct to that question, that quiz, that multiple choise question. Do not end your output without giving a answer to questions contained in the text"
             response = openai.Completion.create(
                 engine="text-davinci-002",
                 prompt=prompt,

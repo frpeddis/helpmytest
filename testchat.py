@@ -3,7 +3,6 @@ import streamlit as st
 
 openai.api_key = st.secrets["API_KEY"]
 
-st.title("💬 Chatbot")
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
 

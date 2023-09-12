@@ -1,7 +1,7 @@
 import openai
 import streamlit as st
 
-openai.api_key = API_KEY
+openai.api_key = st.secrets["API_KEY"]
 
 st.title("💬 Chatbot")
 if "messages" not in st.session_state:
